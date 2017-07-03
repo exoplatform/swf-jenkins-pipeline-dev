@@ -1,1 +1,12 @@
-= = null
+= Environment for Jenkins Pipeline Development with Docker
+:uri-rel-file-base: link:
+:uri-getting-started: {uri-rel-file-base}doc/getting-started.adoc
+
+This repository gives you all the resources to quickly develop and test Jenkins Pipeline jobs in Docker containers:
+
+* a Jenkins2 instance configured out-of-the-box in a Docker container
+* a CI agent configured to execute Pipeline jobs on your host in Docker containers
+* a Git Server and Web UI (Gogs) to locally save your Global Pipeline Libraries
+* *No Docker In Docker*!
+
+To setup this environment in 5 minutes, just read the {uri-getting-started}[Getting Started Guide].

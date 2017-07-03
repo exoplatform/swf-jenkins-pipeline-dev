@@ -5,36 +5,42 @@
 
 === Base Image with plugins
 
+.Create the base Jenkins CI image with all plugins
 [source,shell]
 ----
-$ cd jenkins2/plugins && docker build -t exoplatform/ci:jenkins-plugins .
+$ docker build -t exoplatform/ci:jenkins-plugins jenkins2/plugins/
 ----
+
+[NOTE]
+--
+This intermediate Docker image is created to be more efficient in development mode.
+Indeed, the step where all Jenkins are downloaded is very slow and unstable.
+--
 
 === eXo Jenkins Image
 
+.Create the Jenkins CI Image with all Groovy scripts used to initialize the instance
 [source,shell]
 ----
-$ docker build -t exoplatform/ci:jenkins -f jenkins/.
+$ docker build -t exoplatform/ci:jenkins jenkins2/ --no-cache
 ----
 
 == Launch Jenkins and Gogs
 
-. First run the following command to setup all required software
+.Execute the following command to setup all required software
 [source]
 ----
 $ docker-compose up
 ----
 
-Then configure each software:
-
 === Configure Gogs
 
-. Go to http://localhost:10080/
+. Go to http://localhost:10080/user/sign_up
 .. Create a new account
-... username: exo-gogs
-... password: exo-gogs
+... username: `exo-gogs`
+... password: `exo-gogs`
 .. Create a new repository
-... name: swf-jenkins-pipeline-libs
+... name: `swf-jenkins-pipeline-libs`
 .. Clone it locally and initialize it with eXo Pipeline libs repository
 [source,shell]
 ----
@@ -63,3 +69,7 @@ You should have a Jenkins agent already created.
 ----
 javaws http://localhost:8888/computer/ci-agent/slave-agent.jnlp
 ----
+
+Congrats, You can execute Jenkins Pipeline with Docker!
+
+http://localhost:8888/
