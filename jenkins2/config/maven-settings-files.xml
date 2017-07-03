@@ -1,0 +1,226 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<org.jenkinsci.plugins.configfiles.maven.DefaultMavenSettingsProvider plugin="config-file-provider@2.13">
+  <configs>
+    <entry>
+      <string>exo-ci-maven-settings</string>
+      <org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig>
+        <id>exo-ci-maven-settings</id>
+        <name>Maven Settings</name>
+        <comment>Settings used in each container</comment>
+        <content>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;settings
+xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd"&gt;
+&lt;servers&gt;
+&lt;!-- eXo Platform credentials --&gt;
+&lt;!-- Used to upload binaries on repository.exoplatform.org --&gt;
+&lt;server&gt;
+&lt;id&gt;repository.exoplatform.org&lt;/id&gt;
+&lt;username&gt;&lt;!-- Your eXo LDAP/Crowd Identifier --&gt;&lt;/username&gt;
+&lt;password&gt;&lt;!-- Your eXo LDAP/Crowd Password --&gt;&lt;/password&gt;
+&lt;/server&gt;
+&lt;!-- Used to download private binaries from repository.exoplatform.org --&gt;
+&lt;server&gt;
+&lt;id&gt;exo.private&lt;/id&gt;
+&lt;username&gt;&lt;!-- Your eXo LDAP/Crowd Identifier --&gt;&lt;/username&gt;
+&lt;password&gt;&lt;!-- Your eXo LDAP/Crowd Password --&gt;&lt;/password&gt;
+&lt;/server&gt;
+&lt;!-- Used to download staging binaries from repository.exoplatform.org --&gt;
+&lt;server&gt;
+&lt;id&gt;exo.staging&lt;/id&gt;
+&lt;username&gt;&lt;!-- Your eXo LDAP/Crowd Identifier --&gt;&lt;/username&gt;
+&lt;password&gt;&lt;!-- Your eXo LDAP/Crowd Password --&gt;&lt;/password&gt;
+&lt;/server&gt;
+&lt;!-- Used to download custom projects binaries from repository.exoplatform.org --&gt;
+&lt;server&gt;
+&lt;id&gt;exo.cp&lt;/id&gt;
+&lt;username&gt;&lt;!-- Your eXo LDAP/Crowd Identifier --&gt;&lt;/username&gt;
+&lt;password&gt;&lt;!-- Your eXo LDAP/Crowd Password --&gt;&lt;/password&gt;
+&lt;/server&gt;
+&lt;!-- Used to release projects on repository.jboss.org --&gt;
+&lt;server&gt;
+&lt;id&gt;jboss-releases-repository&lt;/id&gt;
+&lt;username&gt;&lt;!-- Your JBoss.org Identifier --&gt;&lt;/username&gt;
+&lt;password&gt;&lt;!-- Your JBoss.org Password --&gt;&lt;/password&gt;
+&lt;/server&gt;
+&lt;/servers&gt;
+&lt;mirrors&gt;
+&lt;mirror&gt;
+&lt;id&gt;exo-mirror&lt;/id&gt;
+&lt;mirrorOf&gt;external:*,!exo.private,!exo.cp,!exo.staging&lt;/mirrorOf&gt;
+&lt;url&gt;https://repository.exoplatform.org/public&lt;/url&gt;
+&lt;/mirror&gt;
+&lt;/mirrors&gt;
+&lt;profiles&gt;
+&lt;profile&gt;
+&lt;id&gt;exo-central&lt;/id&gt;
+&lt;!-- This "hack" change the behavior of maven to let it use our public mirror
+as the central repository (with snapshots activation).
+The URL is never used and is overrided by the mirror entry.
+--&gt;
+&lt;repositories&gt;
+&lt;repository&gt;
+&lt;id&gt;central&lt;/id&gt;
+&lt;url&gt;http://fake&lt;/url&gt;
+&lt;releases&gt;
+&lt;enabled&gt;true&lt;/enabled&gt;
+&lt;/releases&gt;
+&lt;snapshots&gt;
+&lt;enabled&gt;true&lt;/enabled&gt;
+&lt;/snapshots&gt;
+&lt;/repository&gt;
+&lt;/repositories&gt;
+&lt;pluginRepositories&gt;
+&lt;pluginRepository&gt;
+&lt;id&gt;central&lt;/id&gt;
+&lt;url&gt;http://fake&lt;/url&gt;
+&lt;releases&gt;
+&lt;enabled&gt;true&lt;/enabled&gt;
+&lt;/releases&gt;
+&lt;snapshots&gt;
+&lt;enabled&gt;true&lt;/enabled&gt;
+&lt;/snapshots&gt;
+&lt;/pluginRepository&gt;
+&lt;/pluginRepositories&gt;
+&lt;/profile&gt;
+&lt;!-- Specific settings used while releasing a project --&gt;
+&lt;profile&gt;
+&lt;id&gt;exo-release&lt;/id&gt;
+&lt;properties&gt;
+&lt;gpg.keyname&gt;&lt;!-- The GPG Key to use to sign eXo releases --&gt;&lt;/gpg.keyname&gt;
+&lt;gpg.passphrase&gt;&lt;!-- The passphrase of your GPG Key --&gt;&lt;/gpg.passphrase&gt;
+&lt;/properties&gt;
+&lt;/profile&gt;
+&lt;profile&gt;
+&lt;id&gt;exo-private&lt;/id&gt;
+&lt;!-- Repositories to download eXo private binaries --&gt;
+&lt;repositories&gt;
+&lt;repository&gt;
+&lt;id&gt;exo.private&lt;/id&gt;
+&lt;url&gt;https://repository.exoplatform.org/private&lt;/url&gt;
+&lt;releases&gt;
+&lt;enabled&gt;true&lt;/enabled&gt;
+&lt;/releases&gt;
+&lt;snapshots&gt;
+&lt;enabled&gt;true&lt;/enabled&gt;
+&lt;/snapshots&gt;
+&lt;/repository&gt;
+&lt;/repositories&gt;
+&lt;pluginRepositories&gt;
+&lt;pluginRepository&gt;
+&lt;id&gt;exo.private&lt;/id&gt;
+&lt;url&gt;https://repository.exoplatform.org/private&lt;/url&gt;
+&lt;releases&gt;
+&lt;enabled&gt;true&lt;/enabled&gt;
+&lt;/releases&gt;
+&lt;snapshots&gt;
+&lt;enabled&gt;true&lt;/enabled&gt;
+&lt;/snapshots&gt;
+&lt;/pluginRepository&gt;
+&lt;/pluginRepositories&gt;
+&lt;/profile&gt;
+&lt;profile&gt;
+&lt;!-- Repositories to download eXo custom projects binaries and products patchs --&gt;
+&lt;id&gt;exo-cp&lt;/id&gt;
+&lt;repositories&gt;
+&lt;repository&gt;
+&lt;id&gt;exo.cp&lt;/id&gt;
+&lt;url&gt;https://repository.exoplatform.org/cp&lt;/url&gt;
+&lt;releases&gt;
+&lt;enabled&gt;true&lt;/enabled&gt;
+&lt;/releases&gt;
+&lt;snapshots&gt;
+&lt;enabled&gt;true&lt;/enabled&gt;
+&lt;/snapshots&gt;
+&lt;/repository&gt;
+&lt;/repositories&gt;
+&lt;pluginRepositories&gt;
+&lt;pluginRepository&gt;
+&lt;id&gt;exo.cp&lt;/id&gt;
+&lt;url&gt;https://repository.exoplatform.org/cp&lt;/url&gt;
+&lt;releases&gt;
+&lt;enabled&gt;true&lt;/enabled&gt;
+&lt;/releases&gt;
+&lt;snapshots&gt;
+&lt;enabled&gt;true&lt;/enabled&gt;
+&lt;/snapshots&gt;
+&lt;/pluginRepository&gt;
+&lt;/pluginRepositories&gt;
+&lt;/profile&gt;
+&lt;profile&gt;
+&lt;id&gt;exo-staging&lt;/id&gt;
+&lt;!-- Repositories to download eXo staging binairies --&gt;
+&lt;!-- TAKE CARE TO ACTIVATE IT ONLY IF REQUIRED --&gt;
+&lt;!-- These repositories are delivering binaries marked as released but allowed to be replaced --&gt;
+&lt;!-- Maven never updates released binaries thus you have to cleanup your local repository to grab an updated version --&gt;
+&lt;repositories&gt;
+&lt;repository&gt;
+&lt;id&gt;exo.staging&lt;/id&gt;
+&lt;url&gt;https://repository.exoplatform.org/staging&lt;/url&gt;
+&lt;releases&gt;
+&lt;enabled&gt;true&lt;/enabled&gt;
+&lt;/releases&gt;
+&lt;snapshots&gt;
+&lt;enabled&gt;true&lt;/enabled&gt;
+&lt;/snapshots&gt;
+&lt;/repository&gt;
+&lt;/repositories&gt;
+&lt;pluginRepositories&gt;
+&lt;pluginRepository&gt;
+&lt;id&gt;exo.staging&lt;/id&gt;
+&lt;url&gt;https://repository.exoplatform.org/staging&lt;/url&gt;
+&lt;releases&gt;
+&lt;enabled&gt;true&lt;/enabled&gt;
+&lt;/releases&gt;
+&lt;snapshots&gt;
+&lt;enabled&gt;true&lt;/enabled&gt;
+&lt;/snapshots&gt;
+&lt;/pluginRepository&gt;
+&lt;/pluginRepositories&gt;
+&lt;/profile&gt;
+&lt;profile&gt;
+&lt;id&gt;jboss-staging&lt;/id&gt;
+&lt;!-- Repositories to download JBoss staging binairies --&gt;
+&lt;!-- TAKE CARE TO ACTIVATE IT ONLY IF REQUIRED --&gt;
+&lt;!-- These repositories are delivering binaries marked as released but allowed to be replaced --&gt;
+&lt;!-- Maven never updates released binaries thus you have to cleanup your local repository to grab an updated version --&gt;
+&lt;repositories&gt;
+&lt;repository&gt;
+&lt;id&gt;jboss.staging&lt;/id&gt;
+&lt;url&gt;https://repository.jboss.org/nexus/content/groups/staging/&lt;/url&gt;
+&lt;/repository&gt;
+&lt;/repositories&gt;
+&lt;pluginRepositories&gt;
+&lt;pluginRepository&gt;
+&lt;id&gt;jboss.staging&lt;/id&gt;
+&lt;url&gt;https://repository.jboss.org/nexus/content/groups/staging/&lt;/url&gt;
+&lt;/pluginRepository&gt;
+&lt;/pluginRepositories&gt;
+&lt;/profile&gt;
+&lt;!-- This profile is always activated and let you define properties for dependent environment stuffs --&gt;
+&lt;profile&gt;
+&lt;id&gt;local-properties&lt;/id&gt;
+&lt;properties&gt;
+&lt;!--
+&lt;exo.projects.directory.dependencies&gt;${user.home}/Applications&lt;/exo.projects.directory.dependencies&gt;
+&lt;exo.projects.app.tomcat.version&gt;apache-tomcat-6.0.29&lt;/exo.projects.app.tomcat.version&gt;
+&lt;exo.projects.app.jboss.version&gt;jboss-5.1.0.GA&lt;/exo.projects.app.jboss.version&gt;
+--&gt;
+&lt;/properties&gt;
+&lt;/profile&gt;
+&lt;/profiles&gt;
+&lt;activeProfiles&gt;
+&lt;!-- make these profiles active all the time --&gt;
+&lt;activeProfile&gt;exo-central&lt;/activeProfile&gt;
+&lt;activeProfile&gt;local-properties&lt;/activeProfile&gt;
+&lt;/activeProfiles&gt;
+&lt;/settings&gt;
+</content>
+        <providerId>org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig</providerId>
+        <serverCredentialMappings/>
+        <isReplaceAll>true</isReplaceAll>
+      </org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig>
+    </entry>
+  </configs>
+</org.jenkinsci.plugins.configfiles.maven.DefaultMavenSettingsProvider>

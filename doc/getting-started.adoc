@@ -1,0 +1,65 @@
+= Getting Started with eXo Jenkins2 Pipeline
+
+
+== Build the eXo Jenkins Images
+
+=== Base Image with plugins
+
+[source,shell]
+----
+$ cd jenkins2/plugins && docker build -t exoplatform/ci:jenkins-plugins .
+----
+
+=== eXo Jenkins Image
+
+[source,shell]
+----
+$ docker build -t exoplatform/ci:jenkins -f jenkins/.
+----
+
+== Launch Jenkins and Gogs
+
+. First run the following command to setup all required software
+[source]
+----
+$ docker-compose up
+----
+
+Then configure each software:
+
+=== Configure Gogs
+
+. Go to http://localhost:10080/
+.. Create a new account
+... username: exo-gogs
+... password: exo-gogs
+.. Create a new repository
+... name: swf-jenkins-pipeline-libs
+.. Clone it locally and initialize it with eXo Pipeline libs repository
+[source,shell]
+----
+$ git clone git@github.com:exoplatform/swf-jenkins-pipeline-libs.git && cd swf-jenkins-pipeline-libs
+$ git remote add gogs http://localhost:10080/exo-gogs/swf-jenkins-pipeline-libs.git
+$ git remote -vv
+gogs	http://localhost:10080/exo-gogs/swf-jenkins-pipeline-libs.git (fetch)
+gogs	http://localhost:10080/exo-gogs/swf-jenkins-pipeline-libs.git (push)
+origin	git@github.com:exoplatform/swf-jenkins-pipeline-libs.git (fetch)
+origin	git@github.com:exoplatform/swf-jenkins-pipeline-libs.git (push)
+$ git checkout -b local
+$ git push -u gogs local:master
+$ git branch -vv
+  * local  697501c [gogs/master] Display and Generate Maven HTML Tests Reports
+    master 697501c [origin/master] Display and Generate Maven HTML Tests Reports
+
+----
+
+
+=== Configure Jenkins
+
+You should have a Jenkins agent already created.
+
+. Connect the Agent ci-agent by executing the following command:
+[source,shell]
+----
+javaws http://localhost:8888/computer/ci-agent/slave-agent.jnlp
+----

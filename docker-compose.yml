@@ -1,0 +1,66 @@
+version: '2'
+services:
+  jenkins2:
+    image: exoplatform/ci:jenkins
+    container_name: jenkins2
+    environment:
+      JENKINS_ADMIN_ADDR: admin@exoplatform.com
+      SMTP_HOST: localhost
+      SMTP_PORT: 1025
+      JENKINS_EMAIL_SUFFIX: '@exoplatform.com'
+      JENKINS_REPLYTO_ADDR: exo-swf@exoplatform.com
+      JENKINS_DOCKER_RUN_PARAMS: -u 0:0 --network=swfjenkinspipelinedev_swf
+      JENKINS_USER: exo-ci
+      JENKINS_PASSWORD: exo-ci
+      JENKINS_MASTER_EXECUTORS: 0
+      JENKINS_AGENT_EXECUTORS: 2
+      PIPELINE_LIB_NAME: exo-pipeline-library2
+      PIPELINE_LIB_VERSION: master
+      PIPELINE_LIB_GIT_URL: http://gogs:3000/exo-gogs/swf-jenkins-pipeline-libs.git
+      PIPELINE_LIB_GIT_BRANCH: master
+    ports:
+      - "8888:8080"
+      - "50000:50000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - jenkins_data:/var/jenkins_home
+    networks:
+      - swf
+    privileged: true
+  mail:
+    image: mailhog/mailhog
+    container_name: smtp
+    environment:
+      MH_HOSTNAME: localhost
+      MH_SMTP_BIND_ADDR: 0.0.0.0:1025
+      MH_API_BIND_ADDR: 0.0.0.0:8025
+      MH_UI_BIND_ADDR: 0.0.0.0:8025
+      #MH_UI_WEB_PATH: mail
+    ports: 
+      - "8025:8025"
+    networks:
+      - swf
+  git:
+    image: gogs/gogs
+    container_name: gogs
+    ports:
+      - "10022:22"
+      - "10080:3000"
+    volumes:
+      - git_data:/data
+      - ./gogs/app.ini.tmpl:/data/gogs/conf/app.ini.tmpl
+      - ./gogs/set_settings.sh:/docker/set_settings.sh
+    command: "sh -c '/docker/set_settings.sh'"
+    environment:
+      - VIRTUAL_HOST=localhost:10080
+      - PUBLIC_SSH_PORT=22
+      - APP_NAME="Gogs eXo Git Service"
+      - PUBLIC_PROTO=http
+      - DISABLE_REGISTRATION=false
+    networks:
+      - swf
+volumes:
+  jenkins_data:
+  git_data:
+networks:
+  swf:
