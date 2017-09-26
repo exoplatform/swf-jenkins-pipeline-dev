@@ -4,6 +4,7 @@ services:
     image: exoplatform/ci:jenkins
     container_name: jenkins2
     environment:
+      JAVA_OPTS: "-Dhudson.tasks.MailSender.SEND_TO_UNKNOWN_USERS=true"
       JENKINS_ADMIN_ADDR: admin@exoplatform.com
       SMTP_HOST: mail
       SMTP_PORT: 1025
