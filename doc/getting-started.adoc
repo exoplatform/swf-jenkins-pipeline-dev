@@ -73,3 +73,30 @@ javaws http://localhost:8888/computer/ci-agent/slave-agent.jnlp
 Congrats, You can execute Jenkins Pipeline with Docker!
 
 http://localhost:8888/
+
+=== Create a Seed Job
+
+On the jenkins home page
+
+- click on new item
+- Enter the name of your project
+- select free-style project and validate
+
+On the job configuration
+
+- on ``Source code management`` section
+  1. Select Git
+  1. Repository URL : ``http://localhost:10080/exo-gogs/swf-jenkins-pipeline.git``
+  1. Branches to build ``*/master``
+
+- Add a new build step on the *Build* section of type ``Process Job DSLs``
+- Select `Use the provided DSL script option`
+- Copy and paste you dsl script on the text area
+- Set the values for the options :
+  1. Action for removed jobs: *Delete*
+  1. Action for removed views : *Delete*
+  1. Action for removed config files :  *Ignore*
+- Save
+
+You are ready to test your job
+
