@@ -56,9 +56,25 @@ $ git push -u gogs local:master
 $ git branch -vv
   * local  697501c [gogs/master] Display and Generate Maven HTML Tests Reports
     master 697501c [origin/master] Display and Generate Maven HTML Tests Reports
-
 ----
-
+.. Create a new repository
+... name: `swf-jenkins-pipeline`
+.. Clone it locally and initialize it with eXo Pipeline repository
+[source,shell]
+----
+$ git clone git@github.com:exoplatform/swf-jenkins-pipeline.git && cd swf-jenkins-pipeline
+$ git remote add gogs http://localhost:10080/exo-gogs/swf-jenkins-pipeline.git
+$ git remote -vv
+gogs	http://localhost:10080/exo-gogs/swf-jenkins-pipeline.git (fetch)
+gogs	http://localhost:10080/exo-gogs/swf-jenkins-pipeline.git (push)
+origin	git@github.com:exoplatform/swf-jenkins-pipeline.git (fetch)
+origin	git@github.com:exoplatform/swf-jenkins-pipeline.git (push)
+$ git checkout -b local
+$ git push -u gogs local:master
+$ git branch -vv
+  * local  697501c [gogs/master] Display and Generate Maven HTML Tests Reports
+    master 697501c [origin/master] Display and Generate Maven HTML Tests Reports
+----
 
 === Configure Jenkins
 
