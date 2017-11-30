@@ -86,7 +86,7 @@ On the job configuration
 
 - on ``Source code management`` section
   1. Select Git
-  1. Repository URL : ``http://localhost:10080/exo-gogs/swf-jenkins-pipeline.git``
+  1. Repository URL : ``http://localhost:10080/exo-gogs/swf-jenkins-pipeline-libs.git``
   1. Branches to build ``*/master``
 
 - Add a new build step on the *Build* section of type ``Process Job DSLs``
