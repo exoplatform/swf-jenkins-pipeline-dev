@@ -10,7 +10,7 @@ services:
       SMTP_PORT: 1025
       JENKINS_EMAIL_SUFFIX: '@exoplatform.com'
       JENKINS_REPLYTO_ADDR: exo-swf@exoplatform.com
-      JENKINS_DOCKER_RUN_PARAMS: -u 0:0 --network=swfjenkinspipelinedev_swf
+      JENKINS_DOCKER_RUN_PARAMS: -u 0:0
       JENKINS_USER: exo-ci
       JENKINS_PASSWORD: exo-ci
       JENKINS_MASTER_EXECUTORS: 0
