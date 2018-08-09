@@ -11,6 +11,11 @@
 $ docker build -t exoplatform/ci:jenkins-plugins jenkins2/plugins/
 ----
 
+To install the last versions of the plugins you can execute the same command with an additional build arg :
+----
+$ docker build --build-arg LAST_PLUGINS_VERSION=true -t exoplatform/ci:jenkins-plugins jenkins2/plugins/
+----
+
 [NOTE]
 --
 This intermediate Docker image is created to be more efficient in development mode.
