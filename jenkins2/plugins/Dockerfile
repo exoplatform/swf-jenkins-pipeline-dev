@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:2.121.2
+FROM jenkins/jenkins:2.164.3
 
 LABEL MAINTAINER "eXo Platform <docker@exoplatform.com>"
 
