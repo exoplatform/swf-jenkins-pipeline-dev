@@ -46,7 +46,7 @@ services:
     container_name: gogs
     ports:
       - "10022:22"
-      - "10080:3000"
+      - "3000:3000"
     volumes:
       - git_data:/data
       - ./gogs/app.ini.tmpl:/data/gogs/conf/app.ini.tmpl

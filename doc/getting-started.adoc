@@ -52,8 +52,8 @@ $ docker-compose up
 $ git clone git@github.com:exoplatform/swf-jenkins-pipeline-libs.git && cd swf-jenkins-pipeline-libs
 $ git remote add gogs http://localhost:10080/exo-gogs/swf-jenkins-pipeline-libs.git
 $ git remote -vv
-gogs	http://localhost:10080/exo-gogs/swf-jenkins-pipeline-libs.git (fetch)
-gogs	http://localhost:10080/exo-gogs/swf-jenkins-pipeline-libs.git (push)
+gogs	http://localhost:3000/exo-gogs/swf-jenkins-pipeline-libs.git (fetch)
+gogs	http://localhost:3000/exo-gogs/swf-jenkins-pipeline-libs.git (push)
 origin	git@github.com:exoplatform/swf-jenkins-pipeline-libs.git (fetch)
 origin	git@github.com:exoplatform/swf-jenkins-pipeline-libs.git (push)
 $ git checkout -b local
@@ -70,8 +70,8 @@ $ git branch -vv
 $ git clone git@github.com:exoplatform/swf-jenkins-pipeline.git && cd swf-jenkins-pipeline
 $ git remote add gogs http://localhost:10080/exo-gogs/swf-jenkins-pipeline.git
 $ git remote -vv
-gogs	http://localhost:10080/exo-gogs/swf-jenkins-pipeline.git (fetch)
-gogs	http://localhost:10080/exo-gogs/swf-jenkins-pipeline.git (push)
+gogs	http://localhost:3000/exo-gogs/swf-jenkins-pipeline.git (fetch)
+gogs	http://localhost:3000/exo-gogs/swf-jenkins-pipeline.git (push)
 origin	git@github.com:exoplatform/swf-jenkins-pipeline.git (fetch)
 origin	git@github.com:exoplatform/swf-jenkins-pipeline.git (push)
 $ git checkout -b local
@@ -107,7 +107,7 @@ On the job configuration
 
 - on ``Source code management`` section
   1. Select Git
-  1. Repository URL : ``http://localhost:10080/exo-gogs/swf-jenkins-pipeline.git``
+  1. Repository URL : ``http://localhost:3000/exo-gogs/swf-jenkins-pipeline.git``
   1. Branches to build ``*/master``
 
 - Add a new build step on the *Build* section of type ``Process Job DSLs``
