@@ -83,13 +83,33 @@ $ git branch -vv
 
 === Configure Jenkins
 
-You should have a Jenkins agent already created.
+After the first startup of Jenkins container you will have to finish the install in your browser.
 
-. Connect the Agent ci-agent by executing the following command:
+* Go to http://localhost:8888/ 
+* fill the (generated) admin password which is available in jenkins startup log
+* choose to select the Jenkins Plugins you want to install
+* unselect ALL plugins from the plugin install selection screen
+
+You should have a Jenkins agent already created but you need to start it
+
+* go to http://localhost:8888/computer/ci-agent/
+* download the JavaWebStart file
+
+image::img/jenkins-agent-jws.png[]
+
+* start the agent with the following command (adapt the path to your download location)
+
 [source,shell]
 ----
-javaws http://localhost:8888/computer/ci-agent/slave-agent.jnlp
+javaws ~/Download/slave-agent.jnlp
 ----
+
+image::img/jenkins-agent-launch.png[]
+
+The jenkins agent is now up and running (keep open the tiny ugly window)
+
+image::img/jenkins-agent-window.png[]
+
 
 Congrats, You can execute Jenkins Pipeline with Docker!
 
@@ -109,6 +129,14 @@ On the job configuration
   1. Select Git
   1. Repository URL : ``http://localhost:3000/exo-gogs/swf-jenkins-pipeline.git``
   1. Branches to build ``*/master``
+
+[NOTE]
+====
+Don't be surprised to see warning from jenkins for your url it will work ;-)
+====
+image::img/jenkins-seed-job-git.png[]
+
+
 
 - Add a new build step on the *Build* section of type ``Process Job DSLs``
 - Select `Use the provided DSL script option`
