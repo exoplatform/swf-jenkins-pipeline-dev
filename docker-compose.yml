@@ -53,7 +53,7 @@ services:
       - ./gogs/set_settings.sh:/docker/set_settings.sh
     command: "sh -c '/docker/set_settings.sh'"
     environment:
-      - VIRTUAL_HOST=localhost:10080
+      - VIRTUAL_HOST=localhost:3000
       - PUBLIC_SSH_PORT=22
       - APP_NAME="Gogs eXo Git Service"
       - PUBLIC_PROTO=http

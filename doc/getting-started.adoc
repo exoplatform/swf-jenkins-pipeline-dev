@@ -40,7 +40,7 @@ $ docker-compose up
 
 === Configure Gogs
 
-. Go to http://localhost:10080/user/sign_up
+. Go to http://localhost:3000/user/sign_up
 .. Create a new account
 ... username: `exo-gogs`
 ... password: `exo-gogs`
@@ -50,7 +50,7 @@ $ docker-compose up
 [source,shell]
 ----
 $ git clone git@github.com:exoplatform/swf-jenkins-pipeline-libs.git && cd swf-jenkins-pipeline-libs
-$ git remote add gogs http://localhost:10080/exo-gogs/swf-jenkins-pipeline-libs.git
+$ git remote add gogs http://localhost:3000/exo-gogs/swf-jenkins-pipeline-libs.git
 $ git remote -vv
 gogs	http://localhost:3000/exo-gogs/swf-jenkins-pipeline-libs.git (fetch)
 gogs	http://localhost:3000/exo-gogs/swf-jenkins-pipeline-libs.git (push)
@@ -68,7 +68,7 @@ $ git branch -vv
 [source,shell]
 ----
 $ git clone git@github.com:exoplatform/swf-jenkins-pipeline.git && cd swf-jenkins-pipeline
-$ git remote add gogs http://localhost:10080/exo-gogs/swf-jenkins-pipeline.git
+$ git remote add gogs http://localhost:3000/exo-gogs/swf-jenkins-pipeline.git
 $ git remote -vv
 gogs	http://localhost:3000/exo-gogs/swf-jenkins-pipeline.git (fetch)
 gogs	http://localhost:3000/exo-gogs/swf-jenkins-pipeline.git (push)
